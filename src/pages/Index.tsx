@@ -9,6 +9,7 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import Icon from '@/components/ui/icon';
+import SkillTreeVisualization from '@/components/SkillTreeVisualization';
 
 type SkillStatus = 'locked' | 'available' | 'in-progress' | 'completed';
 type SkillDifficulty = 'beginner' | 'intermediate' | 'advanced';
@@ -232,7 +233,7 @@ const Index = () => {
               ))}
             </nav>
 
-            <Button size="sm" className="bg-accent text-accent-foreground hover:bg-accent/90">
+            <Button size="sm" className="bg-primary text-primary-foreground hover:bg-primary/90">
               <Icon name="Share2" size={16} className="mr-2" />
               Поделиться
             </Button>
@@ -381,7 +382,7 @@ const Index = () => {
 
         {activeTab === 'skills' && (
           <div className="space-y-6 animate-fade-in">
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between mb-6">
               <h2 className="text-3xl font-bold">Дерево навыков</h2>
               <Dialog open={isAddSkillOpen} onOpenChange={setIsAddSkillOpen}>
                 <DialogTrigger asChild>
@@ -436,6 +437,16 @@ const Index = () => {
                 </DialogContent>
               </Dialog>
             </div>
+
+            <SkillTreeVisualization 
+              skills={skills}
+              onSkillClick={(skillId) => {
+                const skill = skills.find(s => s.id === skillId);
+                if (skill?.status === 'available') {
+                  updateSkillStatus(skillId, 'in-progress', 0);
+                }
+              }}
+            />
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {skills.map((skill) => (
