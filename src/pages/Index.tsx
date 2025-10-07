@@ -1,7 +1,7 @@
-import SkillTreeBuilder from '@/components/SkillTreeBuilder';
+import Dashboard from './Dashboard';
 
 const Index = () => {
-  return <SkillTreeBuilder />;
+  return <Dashboard />;
 };
 
 export default Index;
