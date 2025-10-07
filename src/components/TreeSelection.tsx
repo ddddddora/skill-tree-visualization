@@ -5,6 +5,7 @@ import { Badge } from '@/components/ui/badge';
 import Icon from '@/components/ui/icon';
 import { SkillTree } from '@/pages/Builder';
 import { TREE_TEMPLATES } from '@/lib/treeTemplates';
+import CreateTreeForm from './CreateTreeForm';
 
 interface TreeSelectionProps {
   onSelect: (tree: SkillTree) => void;
@@ -101,26 +102,10 @@ const TreeSelection = ({ onSelect }: TreeSelectionProps) => {
 
   if (view === 'scratch') {
     return (
-      <div className="p-8 max-w-2xl mx-auto">
-        <Button 
-          variant="ghost" 
-          onClick={() => setView('main')}
-          className="mb-6"
-        >
-          <Icon name="ArrowLeft" size={20} className="mr-2" />
-          Назад
-        </Button>
-        
-        <Card className="p-8">
-          <h2 className="text-2xl font-bold mb-4">Создать с нуля</h2>
-          <p className="text-muted-foreground mb-6">
-            Эта функция будет доступна в следующей версии
-          </p>
-          <Button variant="outline" onClick={() => setView('main')}>
-            Вернуться назад
-          </Button>
-        </Card>
-      </div>
+      <CreateTreeForm
+        onBack={() => setView('main')}
+        onCreate={onSelect}
+      />
     );
   }
 

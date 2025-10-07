@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import TreeSelection from '@/components/TreeSelection';
 import TreeEditor from '@/components/TreeEditor';
+import CanvasEditor from '@/components/CanvasEditor';
 
 export interface SkillNode {
   id: string;
@@ -34,10 +35,14 @@ const Builder = () => {
     setSelectedTree(null);
   };
 
+  const isEmptyTree = selectedTree && selectedTree.nodes.length === 0;
+
   return (
     <div className="h-full">
       {!selectedTree ? (
         <TreeSelection onSelect={handleTreeSelect} />
+      ) : isEmptyTree ? (
+        <CanvasEditor tree={selectedTree} onBack={handleBack} />
       ) : (
         <TreeEditor tree={selectedTree} onBack={handleBack} />
       )}

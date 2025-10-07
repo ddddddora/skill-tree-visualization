@@ -13,6 +13,7 @@ const Layout = ({ children }: LayoutProps) => {
 
   const navItems = [
     { path: '/', label: 'Dashboard', icon: 'LayoutDashboard' },
+    { path: '/my-trees', label: 'Мои деревья', icon: 'Folder' },
     { path: '/builder', label: 'Конструктор', icon: 'TreePine' },
     { path: '/statistics', label: 'Статистика', icon: 'BarChart3' },
   ];
