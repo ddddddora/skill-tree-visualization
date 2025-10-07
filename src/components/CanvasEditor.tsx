@@ -6,7 +6,6 @@ import { SkillTree, SkillNode } from '@/pages/Builder';
 import CanvasNode from './CanvasNode';
 import CanvasToolbar from './CanvasToolbar';
 import SkillDetailDialog from './SkillDetailDialog';
-import SkillsLibraryPanel from './SkillsLibraryPanel';
 
 interface CanvasEditorProps {
   tree: SkillTree;
@@ -28,7 +27,6 @@ const CanvasEditor = ({ tree: initialTree, onBack }: CanvasEditorProps) => {
   const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
   const [scale, setScale] = useState(1);
   const [pan, setPan] = useState({ x: 0, y: 0 });
-  const [showLibrary, setShowLibrary] = useState(false);
   const canvasRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -184,83 +182,6 @@ const CanvasEditor = ({ tree: initialTree, onBack }: CanvasEditorProps) => {
     });
   };
 
-  const handleAddSkillFromLibrary = (skill: SkillNode) => {
-    setTree({
-      ...tree,
-      nodes: [...tree.nodes, skill],
-    });
-  };
-
-  const handleAddBranchFromLibrary = (skills: SkillNode[]) => {
-    setTree({
-      ...tree,
-      nodes: [...tree.nodes, ...skills],
-    });
-  };
-
-  const handleAutoArrange = () => {
-    const arranged: CanvasNodePosition[] = [];
-    const levelWidth = 300;
-    const levelHeight = 200;
-    
-    const arranged Map = new Map<string, { level: number; index: number }>();
-    const getLevel = (node: SkillNode, currentLevel: number = 0): number => {
-      if (!node.dependencies || node.dependencies.length === 0) {
-        return currentLevel;
-      }
-      const depLevels = node.dependencies
-        .map(depId => {
-          const depInfo = arrangedMap.get(depId);
-          return depInfo ? depInfo.level + 1 : currentLevel;
-        });
-      return Math.max(...depLevels, currentLevel);
-    };
-
-    const levels: SkillNode[][] = [];
-    tree.nodes.forEach(node => {
-      const level = getLevel(node);
-      if (!levels[level]) levels[level] = [];
-      levels[level].push(node);
-      arrangedMap.set(node.id, { level, index: levels[level].length - 1 });
-    });
-
-    levels.forEach((levelNodes, levelIndex) => {
-      levelNodes.forEach((node, nodeIndex) => {
-        arranged.push({
-          id: node.id,
-          x: 100 + levelIndex * levelWidth,
-          y: 100 + nodeIndex * levelHeight,
-          node,
-        });
-      });
-    });
-
-    setNodes(arranged);
-  };
-
-  const handleCanvasDrop = (e: React.DragEvent) => {
-    e.preventDefault();
-    const skillData = e.dataTransfer.getData('skill');
-    if (skillData) {
-      const skill = JSON.parse(skillData);
-      const rect = canvasRef.current?.getBoundingClientRect();
-      if (rect) {
-        const newSkill = {
-          ...skill,
-          id: `${skill.id}-${Date.now()}`,
-        };
-        setTree({
-          ...tree,
-          nodes: [...tree.nodes, newSkill],
-        });
-      }
-    }
-  };
-
-  const handleCanvasDragOver = (e: React.DragEvent) => {
-    e.preventDefault();
-  };
-
   const drawConnections = () => {
     const connections: JSX.Element[] = [];
 
@@ -320,10 +241,6 @@ const CanvasEditor = ({ tree: initialTree, onBack }: CanvasEditorProps) => {
               <Button variant="outline" className="w-full" onClick={() => handleAddSkill()}>
                 <Icon name="Plus" size={18} className="mr-2" />
                 Добавить навык
-              </Button>
-              <Button variant="outline" className="w-full" onClick={() => setShowLibrary(true)}>
-                <Icon name="Library" size={18} className="mr-2" />
-                Библиотека навыков
               </Button>
             </div>
           </Card>
