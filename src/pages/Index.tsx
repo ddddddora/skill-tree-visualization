@@ -177,11 +177,30 @@ const Index = () => {
   };
 
   const updateSkillStatus = (skillId: string, newStatus: SkillStatus, newProgress: number) => {
-    setSkills(skills.map(skill => 
-      skill.id === skillId 
-        ? { ...skill, status: newStatus, progress: newProgress }
-        : skill
-    ));
+    setSkills(prevSkills => {
+      const updatedSkills = prevSkills.map(skill => 
+        skill.id === skillId 
+          ? { ...skill, status: newStatus, progress: newProgress }
+          : skill
+      );
+
+      if (newStatus === 'completed') {
+        return updatedSkills.map(skill => {
+          if (skill.status === 'locked' && skill.dependencies.includes(skillId)) {
+            const allDepsCompleted = skill.dependencies.every(depId => {
+              const dep = updatedSkills.find(s => s.id === depId);
+              return dep?.status === 'completed';
+            });
+            if (allDepsCompleted) {
+              return { ...skill, status: 'available' as SkillStatus };
+            }
+          }
+          return skill;
+        });
+      }
+
+      return updatedSkills;
+    });
   };
 
   const calculateOverallProgress = () => {
@@ -205,12 +224,22 @@ const Index = () => {
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
-                <Icon name="TreePine" className="text-primary-foreground" size={24} />
+              <div className="relative">
+                <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="22" cy="22" r="21" fill="hsl(var(--primary))" opacity="0.1"/>
+                  <path d="M22 10L24 16H20L22 10Z" fill="hsl(var(--primary))"/>
+                  <circle cx="22" cy="18" r="2.5" fill="hsl(var(--primary))"/>
+                  <path d="M22 20L20 26L16 28" stroke="hsl(var(--primary))" strokeWidth="2" strokeLinecap="round"/>
+                  <path d="M22 20L22 26L22 30" stroke="hsl(var(--primary))" strokeWidth="2.5" strokeLinecap="round"/>
+                  <path d="M22 20L24 26L28 28" stroke="hsl(var(--primary))" strokeWidth="2" strokeLinecap="round"/>
+                  <circle cx="16" cy="28" r="2.5" fill="hsl(var(--secondary))"/>
+                  <circle cx="22" cy="30" r="3" fill="hsl(var(--accent))"/>
+                  <circle cx="28" cy="28" r="2.5" fill="hsl(var(--muted))"/>
+                </svg>
               </div>
               <div>
-                <h1 className="text-2xl font-bold text-foreground">Skill Tree</h1>
-                <p className="text-sm text-muted-foreground">Твой путь к мастерству</p>
+                <h1 className="text-2xl font-bold text-foreground tracking-tight">SkillTree</h1>
+                <p className="text-sm text-muted-foreground">Визуализация роста</p>
               </div>
             </div>
             
@@ -431,6 +460,24 @@ const Index = () => {
                           <SelectItem value="advanced">Продвинутый</SelectItem>
                         </SelectContent>
                       </Select>
+                    </div>
+                    <div>
+                      <Label htmlFor="skill-dependencies">Зависимости (опционально)</Label>
+                      <Select>
+                        <SelectTrigger id="skill-dependencies">
+                          <SelectValue placeholder="Требуется сначала пройти..." />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {skills.map((skill) => (
+                            <SelectItem key={skill.id} value={skill.id}>
+                              {skill.title}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                      <p className="text-xs text-muted-foreground mt-1">
+                        Этот навык будет заблокирован до завершения выбранного
+                      </p>
                     </div>
                     <Button className="w-full bg-primary">Создать навык</Button>
                   </div>
