@@ -27,12 +27,14 @@ const Layout = ({ children }: LayoutProps) => {
           <div className="flex items-center gap-3">
             <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
               <rect width="44" height="44" rx="8" fill="hsl(var(--primary))" opacity="0.1"/>
-              <rect x="10" y="14" width="24" height="20" rx="2" stroke="hsl(var(--primary))" strokeWidth="2.5" fill="none"/>
-              <path d="M22 14V10" stroke="hsl(var(--primary))" strokeWidth="2" strokeLinecap="round"/>
-              <path d="M10 34L22 30L34 34" stroke="hsl(var(--primary))" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
-              <path d="M22 24V28" stroke="hsl(var(--primary))" strokeWidth="2" strokeLinecap="round"/>
-              <path d="M18 20L22 24L26 20" stroke="hsl(var(--primary))" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
-              <circle cx="22" cy="10" r="2" fill="hsl(var(--primary))"/>
+              <rect x="8" y="12" width="28" height="24" rx="2" stroke="hsl(var(--primary))" strokeWidth="2.5"/>
+              <path d="M22 36V32" stroke="hsl(var(--primary))" strokeWidth="2.5" strokeLinecap="round"/>
+              <path d="M22 28V20" stroke="hsl(var(--primary))" strokeWidth="2" strokeLinecap="round"/>
+              <path d="M22 20C22 20 18 18 16 16" stroke="hsl(var(--primary))" strokeWidth="2" strokeLinecap="round"/>
+              <path d="M22 20C22 20 26 18 28 16" stroke="hsl(var(--primary))" strokeWidth="2" strokeLinecap="round"/>
+              <circle cx="16" cy="16" r="1.5" fill="hsl(var(--primary))"/>
+              <circle cx="28" cy="16" r="1.5" fill="hsl(var(--primary))"/>
+              <circle cx="22" cy="20" r="1.5" fill="hsl(var(--primary))"/>
             </svg>
             <div>
               <h1 className="text-xl font-bold tracking-tight">SkillTree</h1>
