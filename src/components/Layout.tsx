@@ -26,15 +26,15 @@ const Layout = ({ children }: LayoutProps) => {
         <div className="p-6 border-b border-border">
           <div className="flex items-center gap-3">
             <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="22" cy="22" r="21" fill="hsl(var(--primary))" opacity="0.1"/>
-              <path d="M22 10L24 16H20L22 10Z" fill="hsl(var(--primary))"/>
-              <circle cx="22" cy="18" r="2.5" fill="hsl(var(--primary))"/>
-              <path d="M22 20L20 26L16 28" stroke="hsl(var(--primary))" strokeWidth="2" strokeLinecap="round"/>
-              <path d="M22 20L22 26L22 30" stroke="hsl(var(--primary))" strokeWidth="2.5" strokeLinecap="round"/>
-              <path d="M22 20L24 26L28 28" stroke="hsl(var(--primary))" strokeWidth="2" strokeLinecap="round"/>
-              <circle cx="16" cy="28" r="2.5" fill="hsl(var(--secondary))"/>
-              <circle cx="22" cy="30" r="3" fill="hsl(var(--accent))"/>
-              <circle cx="28" cy="28" r="2.5" fill="hsl(var(--muted))"/>
+              <rect width="44" height="44" rx="10" fill="hsl(var(--primary))" opacity="0.08"/>
+              <path d="M22 32V22" stroke="hsl(var(--primary))" strokeWidth="2.5" strokeLinecap="round"/>
+              <circle cx="18" cy="14" r="2" fill="hsl(var(--primary))"/>
+              <circle cx="26" cy="14" r="2" fill="hsl(var(--primary))"/>
+              <circle cx="22" cy="18" r="2" fill="hsl(var(--primary))"/>
+              <path d="M22 22L18 16" stroke="hsl(var(--primary))" strokeWidth="2" strokeLinecap="round"/>
+              <path d="M22 22L26 16" stroke="hsl(var(--primary))" strokeWidth="2" strokeLinecap="round"/>
+              <path d="M22 22L22 18" stroke="hsl(var(--primary))" strokeWidth="2" strokeLinecap="round"/>
+              <path d="M16 34C16 34 18 32 22 32C26 32 28 34 28 34" stroke="hsl(var(--primary))" strokeWidth="2.5" strokeLinecap="round"/>
             </svg>
             <div>
               <h1 className="text-xl font-bold tracking-tight">SkillTree</h1>
