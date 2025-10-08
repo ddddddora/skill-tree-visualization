@@ -26,15 +26,13 @@ const Layout = ({ children }: LayoutProps) => {
         <div className="p-6 border-b border-border">
           <div className="flex items-center gap-3">
             <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect width="44" height="44" rx="10" fill="hsl(var(--primary))" opacity="0.08"/>
-              <path d="M22 32V22" stroke="hsl(var(--primary))" strokeWidth="2.5" strokeLinecap="round"/>
-              <circle cx="18" cy="14" r="2" fill="hsl(var(--primary))"/>
-              <circle cx="26" cy="14" r="2" fill="hsl(var(--primary))"/>
-              <circle cx="22" cy="18" r="2" fill="hsl(var(--primary))"/>
-              <path d="M22 22L18 16" stroke="hsl(var(--primary))" strokeWidth="2" strokeLinecap="round"/>
-              <path d="M22 22L26 16" stroke="hsl(var(--primary))" strokeWidth="2" strokeLinecap="round"/>
-              <path d="M22 22L22 18" stroke="hsl(var(--primary))" strokeWidth="2" strokeLinecap="round"/>
-              <path d="M16 34C16 34 18 32 22 32C26 32 28 34 28 34" stroke="hsl(var(--primary))" strokeWidth="2.5" strokeLinecap="round"/>
+              <rect width="44" height="44" rx="8" fill="hsl(var(--primary))" opacity="0.1"/>
+              <rect x="10" y="14" width="24" height="20" rx="2" stroke="hsl(var(--primary))" strokeWidth="2.5" fill="none"/>
+              <path d="M22 14V10" stroke="hsl(var(--primary))" strokeWidth="2" strokeLinecap="round"/>
+              <path d="M10 34L22 30L34 34" stroke="hsl(var(--primary))" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M22 24V28" stroke="hsl(var(--primary))" strokeWidth="2" strokeLinecap="round"/>
+              <path d="M18 20L22 24L26 20" stroke="hsl(var(--primary))" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+              <circle cx="22" cy="10" r="2" fill="hsl(var(--primary))"/>
             </svg>
             <div>
               <h1 className="text-xl font-bold tracking-tight">SkillTree</h1>
