@@ -25,7 +25,13 @@ const Layout = ({ children }: LayoutProps) => {
     <div className="min-h-screen bg-background flex flex-col md:flex-row">
       <header className="md:hidden sticky top-0 z-50 bg-card/95 backdrop-blur border-b border-border px-4 py-3 flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <img src="https://cdn.poehali.dev/files/08644768-6677-4e7c-b42b-cd8a6c5fb5f9.png" alt="SkillTree Logo" width="32" height="32" />
+          <img 
+            src="https://cdn.poehali.dev/files/08644768-6677-4e7c-b42b-cd8a6c5fb5f9.png" 
+            alt="SkillTree Logo" 
+            width="32" 
+            height="32" 
+            style={{ filter: 'hue-rotate(20deg) saturate(0.8) brightness(1.1)' }}
+          />
           <h1 className="text-lg font-bold">SkillTree</h1>
         </div>
         <Button variant="ghost" size="icon" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
@@ -81,7 +87,13 @@ const Layout = ({ children }: LayoutProps) => {
       <aside className="hidden md:flex w-64 border-r border-border bg-card/50 flex-col">
         <div className="p-6 border-b border-border">
           <div className="flex items-center gap-3">
-            <img src="https://cdn.poehali.dev/files/08644768-6677-4e7c-b42b-cd8a6c5fb5f9.png" alt="SkillTree Logo" width="44" height="44" />
+            <img 
+              src="https://cdn.poehali.dev/files/08644768-6677-4e7c-b42b-cd8a6c5fb5f9.png" 
+              alt="SkillTree Logo" 
+              width="44" 
+              height="44" 
+              style={{ filter: 'hue-rotate(20deg) saturate(0.8) brightness(1.1)' }}
+            />
             <div>
               <h1 className="text-xl font-bold tracking-tight">SkillTree</h1>
               <p className="text-xs text-muted-foreground">Визуализация роста</p>
