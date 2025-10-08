@@ -30,6 +30,7 @@ const Layout = ({ children }: LayoutProps) => {
             alt="SkillTree Logo" 
             width="32" 
             height="32" 
+            className="rounded-lg transition-all duration-300 hover:brightness-110 hover:scale-105"
             style={{ filter: 'hue-rotate(20deg) saturate(0.8) brightness(1.1)' }}
           />
           <h1 className="text-lg font-bold">SkillTree</h1>
@@ -92,6 +93,7 @@ const Layout = ({ children }: LayoutProps) => {
               alt="SkillTree Logo" 
               width="44" 
               height="44" 
+              className="rounded-xl transition-all duration-300 hover:brightness-110 hover:scale-105 cursor-pointer"
               style={{ filter: 'hue-rotate(20deg) saturate(0.8) brightness(1.1)' }}
             />
             <div>
