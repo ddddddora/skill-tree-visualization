@@ -40,11 +40,11 @@ const Statistics = () => {
   return (
     <div className="space-y-6 animate-fade-in">
       <div>
-        <h1 className="text-3xl font-bold">Статистика</h1>
-        <p className="text-muted-foreground mt-1">Аналитика вашего прогресса в обучении</p>
+        <h1 className="text-2xl sm:text-3xl font-bold">Статистика</h1>
+        <p className="text-sm sm:text-base text-muted-foreground mt-1">Аналитика вашего прогресса в обучении</p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
         <Card className="border-primary/20 bg-gradient-to-br from-primary/5 to-transparent">
           <CardHeader>
             <CardTitle className="text-base flex items-center gap-2">
@@ -55,11 +55,11 @@ const Statistics = () => {
           <CardContent>
             <div className="space-y-2">
               <div className="flex items-baseline gap-2">
-                <span className="text-4xl font-bold">45%</span>
-                <span className="text-sm text-muted-foreground">завершено</span>
+                <span className="text-3xl sm:text-4xl font-bold">45%</span>
+                <span className="text-xs sm:text-sm text-muted-foreground">завершено</span>
               </div>
               <Progress value={45} className="h-2" />
-              <p className="text-sm text-muted-foreground">9 из 20 навыков освоено</p>
+              <p className="text-xs sm:text-sm text-muted-foreground">9 из 20 навыков освоено</p>
             </div>
           </CardContent>
         </Card>
@@ -74,10 +74,10 @@ const Statistics = () => {
           <CardContent>
             <div className="space-y-2">
               <div className="flex items-baseline gap-2">
-                <span className="text-4xl font-bold text-green-700">150</span>
-                <span className="text-sm text-muted-foreground">часов</span>
+                <span className="text-3xl sm:text-4xl font-bold text-green-700">150</span>
+                <span className="text-xs sm:text-sm text-muted-foreground">часов</span>
               </div>
-              <p className="text-sm text-muted-foreground">~25 часов в месяц</p>
+              <p className="text-xs sm:text-sm text-muted-foreground">~25 часов в месяц</p>
             </div>
           </CardContent>
         </Card>
@@ -92,10 +92,10 @@ const Statistics = () => {
           <CardContent>
             <div className="space-y-2">
               <div className="flex items-baseline gap-2">
-                <span className="text-4xl font-bold text-orange-700">24</span>
-                <span className="text-sm text-muted-foreground">дня</span>
+                <span className="text-3xl sm:text-4xl font-bold text-orange-700">24</span>
+                <span className="text-xs sm:text-sm text-muted-foreground">дня</span>
               </div>
-              <p className="text-sm text-muted-foreground">Лучший результат: 31 день</p>
+              <p className="text-xs sm:text-sm text-muted-foreground">Лучший результат: 31 день</p>
             </div>
           </CardContent>
         </Card>
@@ -111,7 +111,7 @@ const Statistics = () => {
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
-              <div className="flex items-end justify-between h-48 gap-3">
+              <div className="flex items-end justify-between h-40 sm:h-48 gap-2 sm:gap-3">
                 {monthlyProgress.map((item, idx) => (
                   <div key={idx} className="flex-1 flex flex-col items-center gap-2">
                     <div className="w-full relative flex-1 flex items-end">
@@ -172,22 +172,22 @@ const Statistics = () => {
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="space-y-3">
+          <div className="space-y-2 sm:space-y-3">
             {timeSpent.map((item, idx) => (
-              <div key={idx} className="flex items-center gap-4 p-3 rounded-lg bg-muted/30">
-                <div className="flex-1">
-                  <div className="flex items-center gap-2 mb-1">
-                    <span className="font-medium">{item.skill}</span>
+              <div key={idx} className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4 p-3 rounded-lg bg-muted/30">
+                <div className="flex-1 w-full">
+                  <div className="flex flex-wrap items-center gap-2 mb-1">
+                    <span className="font-medium text-sm sm:text-base">{item.skill}</span>
                     {item.difficulty === 'easy' && <Badge variant="secondary" className="text-xs">🟢 Легкий</Badge>}
                     {item.difficulty === 'medium' && <Badge variant="secondary" className="text-xs">🟡 Средний</Badge>}
                     {item.difficulty === 'hard' && <Badge variant="secondary" className="text-xs">🔴 Сложный</Badge>}
                   </div>
                   <Progress value={(item.hours / 50) * 100} className="h-1.5" />
                 </div>
-                <div className="text-right">
-                  <p className="text-2xl font-bold">{item.hours}ч</p>
+                <div className="flex items-center gap-2 sm:text-right">
+                  <p className="text-xl sm:text-2xl font-bold">{item.hours}ч</p>
                   {item.status === 'completed' && (
-                    <Icon name="CheckCircle2" size={16} className="text-green-600 mx-auto mt-1" />
+                    <Icon name="CheckCircle2" size={16} className="text-green-600" />
                   )}
                 </div>
               </div>
@@ -204,26 +204,26 @@ const Statistics = () => {
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
             {achievements.map((achievement, idx) => (
               <div 
                 key={idx} 
-                className={`flex items-start gap-4 p-4 rounded-lg border-2 transition-all ${
+                className={`flex items-start gap-3 sm:gap-4 p-3 sm:p-4 rounded-lg border-2 transition-all ${
                   achievement.unlocked 
                     ? 'border-primary bg-primary/5' 
                     : 'border-border bg-muted/20 opacity-50'
                 }`}
               >
-                <div className={`w-12 h-12 rounded-full flex items-center justify-center ${
+                <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center ${
                   achievement.unlocked ? 'bg-primary text-primary-foreground' : 'bg-muted'
                 }`}>
-                  <Icon name={achievement.icon as any} size={24} />
+                  <Icon name={achievement.icon as any} size={20} className="sm:w-6 sm:h-6" />
                 </div>
                 <div className="flex-1">
-                  <h3 className="font-semibold">{achievement.title}</h3>
-                  <p className="text-sm text-muted-foreground mt-0.5">{achievement.description}</p>
+                  <h3 className="font-semibold text-sm sm:text-base">{achievement.title}</h3>
+                  <p className="text-xs sm:text-sm text-muted-foreground mt-0.5">{achievement.description}</p>
                   {achievement.unlocked && (
-                    <Badge variant="secondary" className="mt-2">Получено</Badge>
+                    <Badge variant="secondary" className="mt-2 text-xs">Получено</Badge>
                   )}
                 </div>
               </div>

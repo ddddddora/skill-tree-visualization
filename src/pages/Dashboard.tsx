@@ -48,28 +48,29 @@ const Dashboard = () => {
 
   return (
     <div className="space-y-6 animate-fade-in">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-bold">Dashboard</h1>
-          <p className="text-muted-foreground mt-1">Обзор вашего прогресса в обучении</p>
+          <h1 className="text-2xl sm:text-3xl font-bold">Dashboard</h1>
+          <p className="text-muted-foreground mt-1 text-sm sm:text-base">Обзор вашего прогресса в обучении</p>
         </div>
-        <Button className="bg-primary" onClick={() => navigate('/builder')}>
+        <Button className="bg-primary w-full sm:w-auto" onClick={() => navigate('/builder')}>
           <Icon name="Plus" size={18} className="mr-2" />
           Новая цель
         </Button>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
         {stats.map((stat, idx) => (
           <Card key={idx}>
-            <CardContent className="pt-6">
-              <div className="flex items-center justify-between">
+            <CardContent className="pt-4 sm:pt-6">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center sm:justify-between gap-2">
                 <div>
-                  <p className="text-sm text-muted-foreground">{stat.label}</p>
-                  <p className="text-3xl font-bold mt-1">{stat.value}</p>
+                  <p className="text-xs sm:text-sm text-muted-foreground">{stat.label}</p>
+                  <p className="text-2xl sm:text-3xl font-bold mt-1">{stat.value}</p>
                 </div>
-                <div className={`w-12 h-12 rounded-full ${stat.color} flex items-center justify-center`}>
-                  <Icon name={stat.icon as any} size={24} />
+                <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-full ${stat.color} flex items-center justify-center`}>
+                  <Icon name={stat.icon as any} size={20} className="sm:hidden" />
+                  <Icon name={stat.icon as any} size={24} className="hidden sm:block" />
                 </div>
               </div>
             </CardContent>
@@ -96,21 +97,21 @@ const Dashboard = () => {
               <CardContent className="space-y-4">
                 <Progress value={goal.progress} className="h-2" />
                 
-                <div className="flex items-center justify-between text-sm">
-                  <div className="flex items-center gap-4">
+                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between text-xs sm:text-sm gap-2">
+                  <div className="flex items-center gap-3 sm:gap-4">
                     <div className="flex items-center gap-1">
-                      <Icon name="CheckCircle2" size={16} className="text-green-600" />
+                      <Icon name="CheckCircle2" size={14} className="text-green-600 sm:w-4 sm:h-4" />
                       <span>{goal.completedSkills} завершено</span>
                     </div>
                     <div className="flex items-center gap-1">
-                      <Icon name="Clock" size={16} className="text-blue-600" />
+                      <Icon name="Clock" size={14} className="text-blue-600 sm:w-4 sm:h-4" />
                       <span>{goal.inProgressSkills} в процессе</span>
                     </div>
                   </div>
-                  <span className="text-muted-foreground">{goal.lastUpdated}</span>
+                  <span className="text-muted-foreground text-xs">{goal.lastUpdated}</span>
                 </div>
 
-                <div className="flex gap-2">
+                <div className="flex flex-col sm:flex-row gap-2">
                   <Button variant="outline" size="sm" className="flex-1" onClick={(e) => {
                     e.stopPropagation();
                     navigate(`/builder?goal=${goal.id}`);
