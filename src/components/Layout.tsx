@@ -1,7 +1,8 @@
-import { ReactNode } from 'react';
+import { ReactNode, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import Icon from '@/components/ui/icon';
+import ShareDialog from './ShareDialog';
 
 interface LayoutProps {
   children: ReactNode;
@@ -10,6 +11,7 @@ interface LayoutProps {
 const Layout = ({ children }: LayoutProps) => {
   const navigate = useNavigate();
   const location = useLocation();
+  const [showShareDialog, setShowShareDialog] = useState(false);
 
   const navItems = [
     { path: '/', label: 'Dashboard', icon: 'LayoutDashboard' },
@@ -60,7 +62,7 @@ const Layout = ({ children }: LayoutProps) => {
             <Icon name="User" size={18} className="mr-3" />
             Профиль
           </Button>
-          <Button variant="ghost" className="w-full justify-start">
+          <Button variant="ghost" className="w-full justify-start" onClick={() => setShowShareDialog(true)}>
             <Icon name="Share2" size={18} className="mr-3" />
             Поделиться
           </Button>
@@ -72,6 +74,13 @@ const Layout = ({ children }: LayoutProps) => {
           {children}
         </div>
       </main>
+
+      <ShareDialog
+        open={showShareDialog}
+        onClose={() => setShowShareDialog(false)}
+        treeId="my-profile"
+        treeName="Мой профиль"
+      />
     </div>
   );
 };

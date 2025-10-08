@@ -9,6 +9,7 @@ import Index from "./pages/Index";
 import Builder from "./pages/Builder";
 import Statistics from "./pages/Statistics";
 import MyTrees from "./pages/MyTrees";
+import Profile from "./pages/Profile";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -25,6 +26,7 @@ const App = () => (
           <Route path="/builder" element={<Layout><Builder /></Layout>} />
           <Route path="/builder/:treeId" element={<Layout><Builder /></Layout>} />
           <Route path="/statistics" element={<Layout><Statistics /></Layout>} />
+          <Route path="/profile" element={<Layout><Profile /></Layout>} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
