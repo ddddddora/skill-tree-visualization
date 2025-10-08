@@ -29,12 +29,9 @@ const Layout = ({ children }: LayoutProps) => {
               <rect width="44" height="44" rx="8" fill="hsl(var(--primary))" opacity="0.1"/>
               <rect x="12" y="10" width="20" height="26" rx="2" stroke="hsl(var(--primary))" strokeWidth="2.5"/>
               <path d="M12 32H32" stroke="hsl(var(--primary))" strokeWidth="3" strokeLinecap="round"/>
-              <circle cx="19" cy="16" r="2.5" fill="hsl(var(--primary))" opacity="0.6"/>
-              <circle cx="25" cy="16" r="2.5" fill="hsl(var(--primary))" opacity="0.6"/>
-              <circle cx="22" cy="20" r="3" fill="hsl(var(--primary))" opacity="0.8"/>
-              <path d="M22 23V28" stroke="hsl(var(--primary))" strokeWidth="2.5" strokeLinecap="round"/>
-              <path d="M18 18L22 20" stroke="hsl(var(--primary))" strokeWidth="2" strokeLinecap="round"/>
-              <path d="M26 18L22 20" stroke="hsl(var(--primary))" strokeWidth="2" strokeLinecap="round"/>
+              <path d="M22 28V20" stroke="hsl(var(--primary))" strokeWidth="2.5" strokeLinecap="round"/>
+              <path d="M16 16L22 20L28 16" stroke="hsl(var(--primary))" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M18 22L22 24L26 22" stroke="hsl(var(--primary))" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
             <div>
               <h1 className="text-xl font-bold tracking-tight">SkillTree</h1>
