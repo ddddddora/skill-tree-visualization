@@ -3,6 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import Icon from '@/components/ui/icon';
 import ShareDialog from './ShareDialog';
+import AuthDialog from './AuthDialog';
 
 interface LayoutProps {
   children: ReactNode;
@@ -12,7 +13,9 @@ const Layout = ({ children }: LayoutProps) => {
   const navigate = useNavigate();
   const location = useLocation();
   const [showShareDialog, setShowShareDialog] = useState(false);
+  const [showAuthDialog, setShowAuthDialog] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [user, setUser] = useState<string | null>(null);
 
   const navItems = [
     { path: '/', label: 'Dashboard', icon: 'LayoutDashboard' },
@@ -58,28 +61,54 @@ const Layout = ({ children }: LayoutProps) => {
               </Button>
             ))}
             <div className="pt-4 mt-4 border-t border-border space-y-2">
-              <Button 
-                variant="ghost" 
-                className="w-full justify-start" 
-                onClick={() => {
-                  navigate('/profile');
-                  setMobileMenuOpen(false);
-                }}
-              >
-                <Icon name="User" size={18} className="mr-3" />
-                Профиль
-              </Button>
-              <Button 
-                variant="ghost" 
-                className="w-full justify-start" 
-                onClick={() => {
-                  setShowShareDialog(true);
-                  setMobileMenuOpen(false);
-                }}
-              >
-                <Icon name="Share2" size={18} className="mr-3" />
-                Поделиться
-              </Button>
+              {user ? (
+                <>
+                  <Button 
+                    variant="ghost" 
+                    className="w-full justify-start" 
+                    onClick={() => {
+                      navigate('/profile');
+                      setMobileMenuOpen(false);
+                    }}
+                  >
+                    <Icon name="User" size={18} className="mr-3" />
+                    Профиль
+                  </Button>
+                  <Button 
+                    variant="ghost" 
+                    className="w-full justify-start" 
+                    onClick={() => {
+                      setShowShareDialog(true);
+                      setMobileMenuOpen(false);
+                    }}
+                  >
+                    <Icon name="Share2" size={18} className="mr-3" />
+                    Поделиться
+                  </Button>
+                  <Button 
+                    variant="ghost" 
+                    className="w-full justify-start text-destructive" 
+                    onClick={() => {
+                      setUser(null);
+                      setMobileMenuOpen(false);
+                    }}
+                  >
+                    <Icon name="LogOut" size={18} className="mr-3" />
+                    Выйти
+                  </Button>
+                </>
+              ) : (
+                <Button 
+                  className="w-full" 
+                  onClick={() => {
+                    setShowAuthDialog(true);
+                    setMobileMenuOpen(false);
+                  }}
+                >
+                  <Icon name="LogIn" size={18} className="mr-3" />
+                  Войти
+                </Button>
+              )}
             </div>
           </nav>
         </div>
@@ -118,14 +147,27 @@ const Layout = ({ children }: LayoutProps) => {
         </nav>
 
         <div className="p-4 border-t border-border space-y-2">
-          <Button variant="ghost" className="w-full justify-start" onClick={() => navigate('/profile')}>
-            <Icon name="User" size={18} className="mr-3" />
-            Профиль
-          </Button>
-          <Button variant="ghost" className="w-full justify-start" onClick={() => setShowShareDialog(true)}>
-            <Icon name="Share2" size={18} className="mr-3" />
-            Поделиться
-          </Button>
+          {user ? (
+            <>
+              <Button variant="ghost" className="w-full justify-start" onClick={() => navigate('/profile')}>
+                <Icon name="User" size={18} className="mr-3" />
+                Профиль
+              </Button>
+              <Button variant="ghost" className="w-full justify-start" onClick={() => setShowShareDialog(true)}>
+                <Icon name="Share2" size={18} className="mr-3" />
+                Поделиться
+              </Button>
+              <Button variant="ghost" className="w-full justify-start text-destructive" onClick={() => setUser(null)}>
+                <Icon name="LogOut" size={18} className="mr-3" />
+                Выйти
+              </Button>
+            </>
+          ) : (
+            <Button className="w-full" onClick={() => setShowAuthDialog(true)}>
+              <Icon name="LogIn" size={18} className="mr-3" />
+              Войти
+            </Button>
+          )}
         </div>
       </aside>
 
@@ -140,6 +182,12 @@ const Layout = ({ children }: LayoutProps) => {
         onClose={() => setShowShareDialog(false)}
         treeId="my-profile"
         treeName="Мой профиль"
+      />
+
+      <AuthDialog
+        open={showAuthDialog}
+        onClose={() => setShowAuthDialog(false)}
+        onAuth={(email) => setUser(email)}
       />
     </div>
   );
